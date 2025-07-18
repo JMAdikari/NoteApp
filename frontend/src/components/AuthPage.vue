@@ -63,7 +63,7 @@
           <button
             type="button"
             @click="isLogin = !isLogin"
-            class="w-full text-blue-600 underline text-sm hover:text-blue-800"
+            class="w-full text-white  text-sm hover:text-blue-800"
           >
             {{ isLogin ? 'Need an account? Register' : 'Already have an account? Login' }}
           </button>
