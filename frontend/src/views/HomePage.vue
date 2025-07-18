@@ -38,6 +38,7 @@
 import NoteForm from '@/components/NoteForm.vue';
 import NoteList from '@/components/NoteList.vue';
 import { api } from '@/axios';
+import { ElMessage } from 'element-plus';
 
 export default {
   components: { NoteForm, NoteList },
@@ -86,8 +87,23 @@ export default {
           const notes = res.data;
           await Promise.all(notes.map(note => api.delete(`/notes/${note.id}`)));
           this.getNotes();
+          
+          // Show success message
+          ElMessage({
+            message: 'All notes cleared successfully!',
+            type: 'success',
+            duration: 3000,
+          });
         } catch (error) {
           console.error('Error clearing notes:', error);
+          
+          // Show error message
+          ElMessage({
+            message: 'Error clearing notes. Please try again.',
+            type: 'error',
+            duration: 4000,
+          });
+          
           if (error.response?.status === 401) {
             localStorage.removeItem('token');
             localStorage.removeItem('user');
@@ -97,22 +113,40 @@ export default {
       }
     },
     async logout() {
-      // Clear notes and user data
-      this.notes = [];
-      this.user = null;
-      
-      // Clear local storage
-      localStorage.removeItem('token');
-      localStorage.removeItem('user');
-      
-      // Redirect to auth page
-      this.$router.push('/auth');
-      
-      // Optionally try server logout but don't block on failure
       try {
-        await api.post('/auth/logout');
+        // Clear notes and user data
+        this.notes = [];
+        this.user = null;
+        
+        // Clear local storage
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+        
+        // Show success message
+        ElMessage({
+          message: 'Logged out successfully!',
+          type: 'success',
+          duration: 3000,
+        });
+        
+        // Redirect to auth page
+        this.$router.push('/auth');
+        
+        // Optionally try server logout but don't block on failure
+        try {
+          await api.post('/auth/logout');
+        } catch (error) {
+          console.error('Server logout failed (but client logout succeeded):', error);
+        }
       } catch (error) {
-        console.error('Server logout failed (but client logout succeeded):', error);
+        console.error('Logout error:', error);
+        
+        // Show error message
+        ElMessage({
+          message: 'Error during logout. Please try again.',
+          type: 'error',
+          duration: 4000,
+        });
       }
     },
   },

@@ -75,6 +75,7 @@
 
 <script>
 import { api, sanctum } from '@/axios';
+import { ElMessage } from 'element-plus';
 
 export default {
   data() {
@@ -113,6 +114,13 @@ export default {
         localStorage.setItem('token', response.data.token);
         localStorage.setItem('user', JSON.stringify(response.data.user));
         
+        // Show success message
+        ElMessage({
+          message: this.isLogin ? 'Login successful!' : 'Registration successful!',
+          type: 'success',
+          duration: 3000,
+        });
+        
         this.$router.push('/');
       } catch (error) {
         console.error('Auth error:', error);
@@ -129,6 +137,13 @@ export default {
             this.error = Object.values(errors).flat().join(', ');
           }
         }
+        
+        // Show error message
+        ElMessage({
+          message: this.error,
+          type: 'error',
+          duration: 4000,
+        });
       }
     },
   },

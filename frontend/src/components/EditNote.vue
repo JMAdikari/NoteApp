@@ -46,6 +46,7 @@
 
 <script>
 import { api } from '@/axios';
+import { ElMessage } from 'element-plus';
 
 export default {
   data() {
@@ -64,6 +65,14 @@ export default {
         this.body = res.data.body || '';
       } catch (error) {
         this.error = error.response?.data?.message || 'Error fetching note';
+        
+        // Show error message
+        ElMessage({
+          message: this.error,
+          type: 'error',
+          duration: 4000,
+        });
+        
         if (error.response?.status === 401) {
           localStorage.removeItem('token');
           localStorage.removeItem('user');
@@ -75,9 +84,25 @@ export default {
       try {
         this.error = null;
         await api.put(`/notes/${this.id}`, { title: this.title, body: this.body });
+        
+        // Show success message
+        ElMessage({
+          message: 'Note updated successfully!',
+          type: 'success',
+          duration: 3000,
+        });
+        
         this.$router.push('/');
       } catch (error) {
         this.error = error.response?.data?.message || 'Error updating note';
+        
+        // Show error message
+        ElMessage({
+          message: this.error,
+          type: 'error',
+          duration: 4000,
+        });
+        
         if (error.response?.status === 401) {
           localStorage.removeItem('token');
           localStorage.removeItem('user');

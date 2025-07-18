@@ -35,6 +35,7 @@
 <script>
 import { api } from '@/axios';
 import { format } from 'date-fns';
+import { ElMessage } from 'element-plus';
 
 export default {
   props: ['notes'],
@@ -44,8 +45,23 @@ export default {
         try {
           await api.delete(`/notes/${id}`);
           this.$emit('refresh');
+          
+          // Show success message
+          ElMessage({
+            message: 'Note deleted successfully!',
+            type: 'success',
+            duration: 3000,
+          });
         } catch (error) {
           console.error('Error deleting note:', error);
+          
+          // Show error message
+          ElMessage({
+            message: 'Error deleting note. Please try again.',
+            type: 'error',
+            duration: 4000,
+          });
+          
           if (error.response?.status === 401) {
             localStorage.removeItem('token');
             localStorage.removeItem('user');

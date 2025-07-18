@@ -25,6 +25,7 @@
 
 <script>
 import { api } from '@/axios';
+import { ElMessage } from 'element-plus';
 
 export default {
   data() {
@@ -42,12 +43,27 @@ export default {
         this.title = '';
         this.body = '';
         this.$emit('refresh');
+        
+        // Show success message
+        ElMessage({
+          message: 'Note created successfully!',
+          type: 'success',
+          duration: 3000,
+        });
       } catch (error) {
         console.error('Error creating note:', error);
         console.error('Response data:', error.response?.data);
         console.error('Response status:', error.response?.status);
         
         this.error = error.response?.data?.message || 'An error occurred';
+        
+        // Show error message
+        ElMessage({
+          message: this.error,
+          type: 'error',
+          duration: 4000,
+        });
+        
         if (error.response?.status === 401) {
           localStorage.removeItem('token');
           localStorage.removeItem('user');
