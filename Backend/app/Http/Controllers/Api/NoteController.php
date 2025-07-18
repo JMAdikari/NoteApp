@@ -7,13 +7,25 @@ use Illuminate\Support\Facades\Log;
 
 class NoteController extends Controller
 {
+    /**
+     * Apply authentication middleware to all methods
+     */
+    public function __construct()
+    {
+        $this->middleware('auth:sanctum');
+    }
+
+    /**
+     * Get notes query filtered by authenticated user
+     */
+    private function getUserNotesQuery()
+    {
+        return Note::where('user_id', auth()->id());
+    }
     public function index(Request $request)
     {
         try {
             $user = $request->user();
-            if (!$user) {
-                return response()->json(['message' => 'Unauthenticated'], 401);
-            }
             
             // Log for debugging
             Log::info('Fetching notes for user', [
@@ -21,7 +33,7 @@ class NoteController extends Controller
                 'user_email' => $user->email
             ]);
             
-            $notes = Note::where('user_id', $user->id)
+            $notes = $this->getUserNotesQuery()
                         ->orderBy('created_at', 'desc')
                         ->get();
             
@@ -47,9 +59,6 @@ class NoteController extends Controller
     {
         try {
             $user = $request->user();
-            if (!$user) {
-                return response()->json(['message' => 'Unauthenticated'], 401);
-            }
             
             $validated = $request->validate([
                 'title' => 'required|string|max:255',
@@ -86,11 +95,8 @@ class NoteController extends Controller
     {
         try {
             $user = $request->user();
-            if (!$user) {
-                return response()->json(['message' => 'Unauthenticated'], 401);
-            }
             
-            $note = Note::where('user_id', $user->id)->findOrFail($id);
+            $note = $this->getUserNotesQuery()->findOrFail($id);
             
             Log::info('Note accessed', [
                 'note_id' => $note->id,
@@ -121,11 +127,8 @@ class NoteController extends Controller
     {
         try {
             $user = $request->user();
-            if (!$user) {
-                return response()->json(['message' => 'Unauthenticated'], 401);
-            }
             
-            $note = Note::where('user_id', $user->id)->findOrFail($id);
+            $note = $this->getUserNotesQuery()->findOrFail($id);
             
             $validated = $request->validate([
                 'title' => 'required|string|max:255',
@@ -163,11 +166,8 @@ class NoteController extends Controller
     {
         try {
             $user = $request->user();
-            if (!$user) {
-                return response()->json(['message' => 'Unauthenticated'], 401);
-            }
             
-            $note = Note::where('user_id', $user->id)->findOrFail($id);
+            $note = $this->getUserNotesQuery()->findOrFail($id);
             
             Log::info('Note deleted', [
                 'note_id' => $note->id,
