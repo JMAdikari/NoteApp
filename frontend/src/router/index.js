@@ -8,7 +8,7 @@ const routes = [
     path: '/',
     name: 'Home',
     component: HomePage,
-    meta: { requiresAuth: true },
+    // Remove requiresAuth so non-authenticated users can see landing page
   },
   {
     path: '/auth',
