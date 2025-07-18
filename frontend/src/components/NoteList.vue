@@ -30,6 +30,7 @@
 
 <script>
 import api from '@/axios';
+import { ElMessage } from 'element-plus';
 
 export default {
   props: ['notes'],
@@ -38,9 +39,19 @@ export default {
       if (confirm('Are you sure you want to delete this note?')) {
         try {
           await api.delete(`/notes/${id}`);
+          ElMessage({
+            message: 'Note deleted successfully!',
+            type: 'success',
+            duration: 3000
+          });
           this.$emit('refresh');
         } catch (error) {
           console.error('Error deleting note:', error);
+          ElMessage({
+            message: 'Failed to delete note. Please try again.',
+            type: 'error',
+            duration: 3000
+          });
         }
       }
     },

@@ -49,6 +49,7 @@
 
 <script>
 import api from '@/axios';
+import { ElMessage } from 'element-plus';
 
 export default {
   data() {
@@ -74,9 +75,19 @@ export default {
     async handleSubmit() {
       try {
         await api.put(`/notes/${this.id}`, { title: this.title, body: this.body });
+        ElMessage({
+          message: 'Note updated successfully!',
+          type: 'success',
+          duration: 3000
+        });
         this.$router.push('/');
       } catch (error) {
         console.error('Error updating note:', error);
+        ElMessage({
+          message: 'Failed to update note. Please try again.',
+          type: 'error',
+          duration: 3000
+        });
       }
     },
     cancel() {

@@ -24,6 +24,7 @@
 
 <script>
 import api from '@/axios';
+import { ElMessage } from 'element-plus';
 
 export default {
   data() {
@@ -36,10 +37,20 @@ export default {
     async handleSubmit() {
       try {
         await api.post('/notes', { title: this.title, body: this.body });
+        ElMessage({
+          message: 'Note created successfully!',
+          type: 'success',
+          duration: 3000
+        });
         this.resetForm();
         this.$emit('refresh');
       } catch (error) {
         console.error('Error saving note:', error);
+        ElMessage({
+          message: 'Failed to create note. Please try again.',
+          type: 'error',
+          duration: 3000
+        });
       }
     },
     resetForm() {
