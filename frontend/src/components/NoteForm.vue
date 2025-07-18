@@ -16,14 +16,7 @@
         type="submit"
         class="bg-blue-500 text-white px-6 py-3 rounded-full font-semibold hover:bg-blue-600 transition-all transform hover:scale-105 shadow-md"
       >
-        {{ editing ? 'Update' : 'Add' }} Note
-      </button>
-      <button
-        v-if="editing"
-        @click.prevent="resetForm"
-        class="bg-gray-400 text-white px-6 py-3 rounded-full font-semibold hover:bg-gray-500 transition-all transform hover:scale-105 shadow-md"
-      >
-        Cancel
+        Add Note
       </button>
     </div>
   </form>
@@ -33,33 +26,16 @@
 import api from '@/axios';
 
 export default {
-  props: ['editNote'],
   data() {
     return {
       title: '',
       body: '',
-      id: null,
-      editing: false,
     };
-  },
-  watch: {
-    editNote(note) {
-      if (note) {
-        this.title = note.title;
-        this.body = note.body;
-        this.id = note.id;
-        this.editing = true;
-      }
-    },
   },
   methods: {
     async handleSubmit() {
       try {
-        if (this.editing) {
-          await api.put(`/notes/${this.id}`, { title: this.title, body: this.body });
-        } else {
-          await api.post('/notes', { title: this.title, body: this.body });
-        }
+        await api.post('/notes', { title: this.title, body: this.body });
         this.resetForm();
         this.$emit('refresh');
       } catch (error) {
@@ -69,8 +45,6 @@ export default {
     resetForm() {
       this.title = '';
       this.body = '';
-      this.id = null;
-      this.editing = false;
     },
   },
 };

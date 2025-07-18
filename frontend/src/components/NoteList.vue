@@ -10,7 +10,7 @@
         <p class="text-gray-700 mb-4">{{ note.body || 'No content' }}</p>
         <div class="flex gap-3">
           <button
-            @click="edit(note)"
+            @click="edit(note.id)"
             class="bg-blue-600 text-white px-4 py-2 rounded-full font-semibold hover:bg-blue-700 transition-all transform hover:scale-105 shadow"
           >
             Edit
@@ -44,8 +44,8 @@ export default {
         }
       }
     },
-    edit(note) {
-      this.$emit('update:editNote', note);
+    edit(id) {
+      this.$router.push(`/notes/${id}/edit`);
     },
   },
 };
