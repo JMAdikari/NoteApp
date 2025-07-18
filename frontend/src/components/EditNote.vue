@@ -1,9 +1,7 @@
 <template>
   <div class="min-h-screen relative overflow-hidden">
-    <!-- 3D Background -->
     <div class="absolute inset-0 bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 animate-gradient z-0"></div>
     <div class="relative z-10 container mx-auto px-4 py-8">
-      <!-- Header Section -->
       <div class="text-center mb-12">
         <h1 class="text-4xl md:text-5xl font-bold text-white drop-shadow-lg mb-4">
           📝 Edit Note
@@ -12,10 +10,8 @@
           Update your note below.
         </p>
       </div>
-      
-      <!-- Edit Form -->
-      <div class="bg-white/90 backdrop-blur-sm rounded-lg shadow-2xl p-6 mb-8 max-w-3xl mx-auto">
-        <form @submit.prevent="handleSubmit" class="space-y-6">
+      <div class="bg-white/90 backdrop-blur-sm rounded-lg shadow-2xl p-6 max-w-3xl mx-auto">
+        <form @submit.prevent="submit" class="space-y-6">
           <input
             v-model="title"
             placeholder="Note Title"
@@ -27,6 +23,7 @@
             placeholder="Note body (optional)"
             class="w-full p-4 rounded-md border border-gray-200 focus:border-blue-400 focus:ring focus:ring-blue-100 focus:ring-opacity-50 text-gray-900 bg-white h-40"
           ></textarea>
+          <div v-if="error" class="text-red-600 text-sm">{{ error }}</div>
           <div class="flex gap-4">
             <button
               type="submit"
@@ -35,7 +32,7 @@
               Update Note
             </button>
             <button
-              @click.prevent="cancel"
+              @click.prevent="$router.push('/')"
               class="bg-gray-400 text-white px-6 py-3 rounded-full font-semibold hover:bg-gray-500 transition-all transform hover:scale-105 shadow-md"
             >
               Cancel
@@ -48,50 +45,45 @@
 </template>
 
 <script>
-import api from '@/axios';
-import { ElMessage } from 'element-plus';
+import { api } from '@/axios';
 
 export default {
   data() {
     return {
       title: '',
       body: '',
-      id: null,
+      id: this.$route.params.id,
+      error: null,
     };
   },
   methods: {
     async fetchNote() {
       try {
-        const id = this.$route.params.id;
-        const res = await api.get(`/notes/${id}`);
+        const res = await api.get(`/notes/${this.id}`);
         this.title = res.data.title;
         this.body = res.data.body || '';
-        this.id = id;
       } catch (error) {
-        console.error('Error fetching note:', error);
-        this.$router.push('/');
+        this.error = error.response?.data?.message || 'Error fetching note';
+        if (error.response?.status === 401) {
+          localStorage.removeItem('token');
+          localStorage.removeItem('user');
+          this.$router.push('/auth');
+        }
       }
     },
-    async handleSubmit() {
+    async submit() {
       try {
+        this.error = null;
         await api.put(`/notes/${this.id}`, { title: this.title, body: this.body });
-        ElMessage({
-          message: 'Note updated successfully!',
-          type: 'success',
-          duration: 3000
-        });
         this.$router.push('/');
       } catch (error) {
-        console.error('Error updating note:', error);
-        ElMessage({
-          message: 'Failed to update note. Please try again.',
-          type: 'error',
-          duration: 3000
-        });
+        this.error = error.response?.data?.message || 'Error updating note';
+        if (error.response?.status === 401) {
+          localStorage.removeItem('token');
+          localStorage.removeItem('user');
+          this.$router.push('/auth');
+        }
       }
-    },
-    cancel() {
-      this.$router.push('/');
     },
   },
   mounted() {
@@ -101,30 +93,18 @@ export default {
 </script>
 
 <style scoped>
-/* 3D Background Animation */
 @keyframes gradient {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
-
 .animate-gradient {
   background-size: 200% 200%;
   animation: gradient 15s ease infinite;
 }
-
-/* Ensure 3D transform compatibility */
 form {
   transform: translateZ(0);
 }
-
-/* Hover effect for form */
 form:hover {
   transform: translateY(-2px) translateZ(5px);
 }

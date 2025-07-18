@@ -1,5 +1,5 @@
 <template>
-  <form @submit.prevent="handleSubmit" class="space-y-6 bg-white/95 backdrop-blur-sm p-6 rounded-lg shadow-lg">
+  <form @submit.prevent="submit" class="space-y-6 bg-white/95 backdrop-blur-sm p-6 rounded-lg shadow-lg">
     <input
       v-model="title"
       placeholder="Note Title"
@@ -11,6 +11,7 @@
       placeholder="Note body (optional)"
       class="w-full p-4 rounded-md border border-gray-200 focus:border-blue-400 focus:ring focus:ring-blue-100 focus:ring-opacity-50 text-gray-900 bg-white h-40"
     ></textarea>
+    <div v-if="error" class="text-red-600 text-sm">{{ error }}</div>
     <div class="flex gap-4">
       <button
         type="submit"
@@ -23,51 +24,45 @@
 </template>
 
 <script>
-import api from '@/axios';
-import { ElMessage } from 'element-plus';
+import { api } from '@/axios';
 
 export default {
   data() {
     return {
       title: '',
       body: '',
+      error: null,
     };
   },
   methods: {
-    async handleSubmit() {
+    async submit() {
       try {
+        this.error = null;
         await api.post('/notes', { title: this.title, body: this.body });
-        ElMessage({
-          message: 'Note created successfully!',
-          type: 'success',
-          duration: 3000
-        });
-        this.resetForm();
+        this.title = '';
+        this.body = '';
         this.$emit('refresh');
       } catch (error) {
-        console.error('Error saving note:', error);
-        ElMessage({
-          message: 'Failed to create note. Please try again.',
-          type: 'error',
-          duration: 3000
-        });
+        console.error('Error creating note:', error);
+        console.error('Response data:', error.response?.data);
+        console.error('Response status:', error.response?.status);
+        
+        this.error = error.response?.data?.message || 'An error occurred';
+        if (error.response?.status === 401) {
+          localStorage.removeItem('token');
+          localStorage.removeItem('user');
+          this.$router.push('/auth');
+        }
       }
-    },
-    resetForm() {
-      this.title = '';
-      this.body = '';
     },
   },
 };
 </script>
 
 <style scoped>
-/* Ensure 3D transform compatibility */
 form {
   transform: translateZ(0);
 }
-
-/* Hover effect for form */
 form:hover {
   transform: translateY(-2px) translateZ(5px);
 }
