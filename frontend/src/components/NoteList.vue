@@ -4,10 +4,14 @@
       <div
         v-for="note in notes"
         :key="note.id"
-        class="bg-white/95 backdrop-blur-sm p-6 rounded-lg shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1"
+        class="bg-white/95 backdrop-blur-sm p-6 rounded-lg shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1 relative"
       >
+        <div class="absolute top-4 right-4 text-white text-sm bg-gray-800/80 p-2 rounded-md">
+          <p>Created: {{ formatDate(note.created_at) }}</p>
+          <p>Updated: {{ formatDate(note.updated_at) }}</p>
+        </div>
         <h3 class="text-xl font-semibold text-gray-800 mb-2">{{ note.title }}</h3>
-        <p class="text-gray-700 mb-4">{{ note.body || 'No content' }}</p>
+        <p class=" text-white text-sm bg-gray-800/80 p-2 rounded-md">{{ note.body || 'No content' }}</p>
         <div class="flex gap-3">
           <button
             @click="edit(note.id)"
@@ -24,12 +28,13 @@
         </div>
       </div>
     </div>
-    <p v-else class="text-center text-gray-500 text-lg">No notes yet. Start adding some!</p>
+    <p v-else class=" text-center text-white  p-3 rounded-md">No notes yet. Start adding some!</p>
   </div>
 </template>
 
 <script>
 import api from '@/axios';
+import { format } from 'date-fns';
 import { ElMessage } from 'element-plus';
 
 export default {
@@ -55,8 +60,32 @@ export default {
         }
       }
     },
+    async clearAllNotes() {
+      if (confirm('Are you sure you want to delete all notes? This action cannot be undone.')) {
+        try {
+          await api.delete('/notes');
+          ElMessage({
+            message: 'All notes deleted successfully!',
+            type: 'success',
+            duration: 3000
+          });
+          this.$emit('refresh');
+        } catch (error) {
+          console.error('Error clearing notes:', error);
+          ElMessage({
+            message: 'Failed to delete all notes. Please try again.',
+            type: 'error',
+            duration: 3000
+          });
+        }
+      }
+    },
     edit(id) {
       this.$router.push(`/notes/${id}/edit`);
+    },
+    formatDate(dateString) {
+      if (!dateString) return 'N/A';
+      return format(new Date(dateString), 'MM/dd/yyyy hh:mm a');
     },
   },
 };
