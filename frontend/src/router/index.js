@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import HomePage from '@/views/HomePage.vue';
+import ProfilePage from '@/views/ProfilePage.vue';
 import EditNote from '@/components/EditNote.vue';
 import AuthPage from '@/components/AuthPage.vue';
 
@@ -14,6 +15,12 @@ const routes = [
     path: '/auth',
     name: 'Auth',
     component: AuthPage,
+  },
+  {
+    path: '/profile',
+    name: 'Profile',
+    component: ProfilePage,
+    meta: { requiresAuth: true },
   },
   {
     path: '/notes/:id/edit',

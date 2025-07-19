@@ -114,6 +114,12 @@
       </div>
       <div class="flex justify-center gap-4 mt-8">
         <button
+          class="bg-green-600 text-white px-6 py-3 rounded-full font-semibold hover:bg-green-700 transition-all transform hover:scale-105 shadow-lg"
+          @click="navigateToProfile"
+        >
+          👤 Profile
+        </button>
+        <button
           class="bg-purple-600 text-white px-6 py-3 rounded-full font-semibold hover:bg-purple-700 transition-all transform hover:scale-105 shadow-lg"
           @click="clearAllNotes"
         >
@@ -154,6 +160,9 @@ export default {
   methods: {
     navigateToAuth() {
       this.$router.push('/auth');
+    },
+    navigateToProfile() {
+      this.$router.push('/profile');
     },
     async getNotes() {
       try {
