@@ -4,31 +4,31 @@
       <div
         v-for="note in notes"
         :key="note.id"
-        class="bg-white/95 backdrop-blur-sm p-6 rounded-lg shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1 relative"
+        class="bg-gray-800/95 backdrop-blur-sm p-6 rounded-lg shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1 relative border border-gray-700"
       >
-        <div class="absolute top-4 right-4 text-white text-sm bg-gray-800/80 p-2 rounded-md">
+        <div class="absolute top-4 right-4 text-gray-300 text-sm bg-gray-900/80 p-2 rounded-md border border-gray-600">
           <p>Created: {{ formatDate(note.created_at) }}</p>
           <p>Updated: {{ formatDate(note.updated_at) }}</p>
         </div>
-        <h3 class="text-xl font-semibold text-gray-800 mb-2">{{ note.title }}</h3>
-        <p class="text-gray-700 mb-4">{{ note.body || 'No content' }}</p>
+        <h3 class="text-xl font-semibold text-white mb-2">{{ note.title }}</h3>
+        <p class="text-gray-300 mb-4">{{ note.body || 'No content' }}</p>
         <div class="flex gap-3">
           <button
             @click="edit(note.id)"
-            class="bg-blue-600 text-white px-4 py-2 rounded-full font-semibold hover:bg-blue-700 transition-all transform hover:scale-105 shadow"
+            class="bg-blue-700 text-white px-4 py-2 rounded-full font-semibold hover:bg-blue-800 transition-all transform hover:scale-105 shadow border border-blue-600"
           >
             Edit
           </button>
           <button
             @click="deleteNote(note.id)"
-            class="bg-red-600 text-white px-4 py-2 rounded-full font-semibold hover:bg-red-700 transition-all transform hover:scale-105 shadow"
+            class="bg-red-700 text-white px-4 py-2 rounded-full font-semibold hover:bg-red-800 transition-all transform hover:scale-105 shadow border border-red-600"
           >
             Delete
           </button>
         </div>
       </div>
     </div>
-    <p v-else class="text-center text-gray-500 text-lg">No notes yet. Start adding some!</p>
+    <p v-else class="text-center text-white text-lg">No notes yet. Start adding some!</p>
   </div>
 </template>
 

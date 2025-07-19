@@ -1,6 +1,6 @@
 <template>
   <div class="min-h-screen relative overflow-hidden">
-    <div class="absolute inset-0 bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 animate-gradient z-0"></div>
+    <div class="absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-800 to-black animate-gradient z-0"></div>
     
     <!-- Landing Page for Non-Authenticated Users -->
     <div v-if="!isAuthenticated" class="relative z-10 container mx-auto px-4 py-8">
@@ -14,59 +14,59 @@
       </div>
       
       <!-- About Section -->
-      <div class="bg-white backdrop-blur-sm rounded-lg shadow-2xl p-8 mb-8 max-w-4xl mx-auto">
-        <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">Welcome to My Notes</h2>
+      <div class="bg-gray-800/90 backdrop-blur-sm rounded-lg shadow-2xl p-8 mb-8 max-w-4xl mx-auto border border-gray-700">
+        <h2 class="text-3xl font-bold text-white mb-6 text-center">Welcome to My Notes</h2>
         <div class="grid md:grid-cols-2 gap-8">
           <div class="space-y-6">
             <div class="flex items-start space-x-4">
-              <div class="bg-blue-100 p-3 rounded-full">
-                <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div class="bg-blue-900/80 p-3 rounded-full">
+                <svg class="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
                 </svg>
               </div>
               <div>
-                <h3 class="text-xl font-semibold text-gray-800 mb-2">Create & Edit Notes</h3>
-                <p class="text-gray-600">Easily create, edit, and organize your thoughts with our intuitive note-taking interface.</p>
+                <h3 class="text-xl font-semibold text-white mb-2">Create & Edit Notes</h3>
+                <p class="text-gray-300">Easily create, edit, and organize your thoughts with our intuitive note-taking interface.</p>
               </div>
             </div>
             
             <div class="flex items-start space-x-4">
-              <div class="bg-purple-100 p-3 rounded-full">
-                <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div class="bg-purple-900/80 p-3 rounded-full">
+                <svg class="w-6 h-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                 </svg>
               </div>
               <div>
-                <h3 class="text-xl font-semibold text-gray-800 mb-2">Secure & Private</h3>
-                <p class="text-gray-600">Your notes are securely stored and only accessible to you with proper authentication.</p>
+                <h3 class="text-xl font-semibold text-white mb-2">Secure & Private</h3>
+                <p class="text-gray-300">Your notes are securely stored and only accessible to you with proper authentication.</p>
               </div>
             </div>
             
             <div class="flex items-start space-x-4">
-              <div class="bg-green-100 p-3 rounded-full">
-                <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div class="bg-green-900/80 p-3 rounded-full">
+                <svg class="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
                 </svg>
               </div>
               <div>
-                <h3 class="text-xl font-semibold text-gray-800 mb-2">Fast & Responsive</h3>
-                <p class="text-gray-600">Lightning-fast performance with a beautiful, responsive design that works on all devices.</p>
+                <h3 class="text-xl font-semibold text-white mb-2">Fast & Responsive</h3>
+                <p class="text-gray-300">Lightning-fast performance with a beautiful, responsive design that works on all devices.</p>
               </div>
             </div>
           </div>
           
           <div class="flex flex-col justify-center items-center space-y-6">
             <div class="text-center">
-              <h3 class="text-2xl font-bold text-gray-800 mb-4">Ready to get started?</h3>
-              <p class="text-gray-600 mb-6">Join thousands of users who trust My Notes to organize their thoughts and ideas.</p>
+              <h3 class="text-2xl font-bold text-white mb-4">Ready to get started?</h3>
+              <p class="text-gray-300 mb-6">Join thousands of users who trust My Notes to organize their thoughts and ideas.</p>
               <button
                 @click="navigateToAuth"
-                class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-full font-bold text-lg hover:from-blue-700 hover:to-purple-700 transition-all transform hover:scale-105 shadow-lg hover:shadow-xl"
+                class="bg-gradient-to-r from-gray-600 to-gray-800 text-white px-8 py-4 rounded-full font-bold text-lg hover:from-gray-700 hover:to-gray-900 transition-all transform hover:scale-105 shadow-lg hover:shadow-xl border border-gray-600"
               >
                 Let's Create Notes! 🚀
               </button>
             </div>
-            <div class="text-center text-sm text-gray-500">
+            <div class="text-center text-sm text-gray-400">
               <p>✨ Free to use • 🔒 Secure • 📱 Mobile friendly</p>
             </div>
           </div>
@@ -74,23 +74,23 @@
       </div>
       
       <!-- Features Section -->
-      <div class="bg-white backdrop-blur-sm rounded-lg shadow-xl p-6 max-w-4xl mx-auto">
-        <h3 class="text-2xl font-bold text-gray-800 mb-4 text-center">Why Choose My Notes?</h3>
+      <div class="bg-gray-800/90 backdrop-blur-sm rounded-lg shadow-xl p-6 max-w-4xl mx-auto border border-gray-700">
+        <h3 class="text-2xl font-bold text-white mb-4 text-center">Why Choose My Notes?</h3>
         <div class="grid md:grid-cols-3 gap-6 text-center">
           <div class="space-y-3">
             <div class="text-4xl">⚡</div>
-            <h4 class="font-semibold text-gray-800">Lightning Fast</h4>
-            <p class="text-sm text-gray-600">Instant note creation and editing with real-time updates</p>
+            <h4 class="font-semibold text-white">Lightning Fast</h4>
+            <p class="text-sm text-gray-300">Instant note creation and editing with real-time updates</p>
           </div>
           <div class="space-y-3">
             <div class="text-4xl">🎨</div>
-            <h4 class="font-semibold text-gray-800">Beautiful UI</h4>
-            <p class="text-sm text-gray-600">Clean, modern interface designed for productivity</p>
+            <h4 class="font-semibold text-white">Beautiful UI</h4>
+            <p class="text-sm text-gray-300">Clean, modern interface designed for productivity</p>
           </div>
           <div class="space-y-3">
             <div class="text-4xl">🔄</div>
-            <h4 class="font-semibold text-gray-800">Auto-Save</h4>
-            <p class="text-sm text-gray-600">Never lose your work with automatic saving</p>
+            <h4 class="font-semibold text-white">Auto-Save</h4>
+            <p class="text-sm text-gray-300">Never lose your work with automatic saving</p>
           </div>
         </div>
       </div>
@@ -102,31 +102,31 @@
         <h1 class="text-4xl md:text-5xl font-bold text-white drop-shadow-lg mb-4">
           📝 My Notes
         </h1>
-        <p class="text-lg md:text-xl text-white/80 max-w-2xl mx-auto">
+        <p class="text-lg md:text-xl text-white max-w-2xl mx-auto">
           Welcome back, {{ user?.name || 'User' }}! Manage your notes below.
         </p>
       </div>
-      <div class="bg-white/90 backdrop-blur-sm rounded-lg shadow-2xl p-6 mb-8 max-w-3xl mx-auto">
+      <div class="bg-gray-800/90 backdrop-blur-sm rounded-lg shadow-2xl p-6 mb-8 max-w-3xl mx-auto border border-gray-700">
         <NoteForm @refresh="getNotes" />
       </div>
-      <div class="bg-white/90 backdrop-blur-sm rounded-lg shadow-2xl p-6 max-w-3xl mx-auto">
+      <div class="bg-gray-800/90 backdrop-blur-sm rounded-lg shadow-2xl p-6 max-w-3xl mx-auto border border-gray-700">
         <NoteList :notes="notes" @refresh="getNotes" />
       </div>
       <div class="flex justify-center gap-4 mt-8">
         <button
-          class="bg-green-600 text-white px-6 py-3 rounded-full font-semibold hover:bg-green-700 transition-all transform hover:scale-105 shadow-lg"
+          class="bg-blue-700 text-white px-6 py-3 rounded-full font-semibold hover:bg-green-800 transition-all transform hover:scale-105 shadow-lg border border-green-600"
           @click="navigateToProfile"
         >
-          👤 Profile
+          Profile
         </button>
         <button
-          class="bg-purple-600 text-white px-6 py-3 rounded-full font-semibold hover:bg-purple-700 transition-all transform hover:scale-105 shadow-lg"
+          class="bg-purple-700 text-white px-6 py-3 rounded-full font-semibold hover:bg-purple-800 transition-all transform hover:scale-105 shadow-lg border border-purple-600"
           @click="clearAllNotes"
         >
           Clear All Notes
         </button>
         <button
-          class="bg-red-600 text-white px-6 py-3 rounded-full font-semibold hover:bg-red-700 transition-all transform hover:scale-105 shadow-lg"
+          class="bg-red-700 text-white px-6 py-3 rounded-full font-semibold hover:bg-red-800 transition-all transform hover:scale-105 shadow-lg border border-red-600"
           @click="logout"
         >
           Logout

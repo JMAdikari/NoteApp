@@ -1,21 +1,21 @@
 <template>
-  <form @submit.prevent="submit" class="space-y-6 bg-white/95 backdrop-blur-sm p-6 rounded-lg shadow-lg">
+  <form @submit.prevent="submit" class="space-y-6 bg-gray-800/95 backdrop-blur-sm p-6 rounded-lg shadow-lg border border-gray-700">
     <input
       v-model="title"
       placeholder="Note Title"
       required
-      class="w-full p-4 rounded-md border border-gray-200 focus:border-blue-400 focus:ring focus:ring-blue-100 focus:ring-opacity-50 text-gray-900 bg-white"
+      class="w-full p-4 rounded-md border border-gray-600 focus:border-gray-500 focus:ring focus:ring-gray-500 focus:ring-opacity-50 text-white bg-gray-700 placeholder-gray-400"
     />
     <textarea
       v-model="body"
       placeholder="Note body (optional)"
-      class="w-full p-4 rounded-md border border-gray-200 focus:border-blue-400 focus:ring focus:ring-blue-100 focus:ring-opacity-50 text-gray-900 bg-white h-40"
+      class="w-full p-4 rounded-md border border-gray-600 focus:border-gray-500 focus:ring focus:ring-gray-500 focus:ring-opacity-50 text-white bg-gray-700 h-40 placeholder-gray-400"
     ></textarea>
     <div v-if="error" class="text-red-600 text-sm">{{ error }}</div>
     <div class="flex gap-4">
       <button
         type="submit"
-        class="bg-blue-500 text-white px-6 py-3 rounded-full font-semibold hover:bg-blue-600 transition-all transform hover:scale-105 shadow-md"
+        class="bg-gray-700 text-white px-6 py-3 rounded-full font-semibold hover:bg-gray-800 transition-all transform hover:scale-105 shadow-md border border-gray-600"
       >
         Add Note
       </button>

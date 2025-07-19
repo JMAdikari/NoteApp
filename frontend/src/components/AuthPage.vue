@@ -1,6 +1,6 @@
 <template>
   <div class="min-h-screen relative overflow-hidden">
-    <div class="absolute inset-0 bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 animate-gradient z-0"></div>
+    <div class="absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-800 to-black animate-gradient z-0"></div>
     <div class="relative z-10 container mx-auto px-4 py-8">
       <div class="text-center mb-12">
         <h1 class="text-4xl md:text-5xl font-bold text-white drop-shadow-lg mb-4">
@@ -10,45 +10,45 @@
           Sign in or create an account to start managing your notes.
         </p>
       </div>
-      <div class="bg-white/90 backdrop-blur-sm rounded-lg shadow-2xl p-6 max-w-md mx-auto">
-        <h2 class="text-2xl font-semibold text-gray-800 mb-4">{{ isLogin ? 'Login' : 'Register' }}</h2>
+      <div class="bg-gray-800/90 backdrop-blur-sm rounded-lg shadow-2xl p-6 max-w-md mx-auto border border-gray-700">
+        <h2 class="text-2xl font-semibold text-white mb-4">{{ isLogin ? 'Login' : 'Register' }}</h2>
         <form @submit.prevent="submit" class="space-y-4">
           <div v-if="!isLogin">
-            <label class="block text-gray-700 font-medium">Name</label>
+            <label class="block text-gray-300 font-medium">Name</label>
             <input
               v-model="form.name"
               type="text"
-              class="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              class="w-full p-2 border border-gray-600 bg-gray-700 text-white rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-gray-500"
               placeholder="Enter your name"
               required
             />
           </div>
           <div>
-            <label class="block text-gray-700 font-medium">Email</label>
+            <label class="block text-gray-300 font-medium">Email</label>
             <input
               v-model="form.email"
               type="email"
-              class="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              class="w-full p-2 border border-gray-600 bg-gray-700 text-white rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-gray-500"
               placeholder="Enter your email"
               required
             />
           </div>
           <div>
-            <label class="block text-gray-700 font-medium">Password</label>
+            <label class="block text-gray-300 font-medium">Password</label>
             <input
               v-model="form.password"
               type="password"
-              class="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              class="w-full p-2 border border-gray-600 bg-gray-700 text-white rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-gray-500"
               placeholder="Enter your password"
               required
             />
           </div>
           <div v-if="!isLogin">
-            <label class="block text-gray-700 font-medium">Confirm Password</label>
+            <label class="block text-gray-300 font-medium">Confirm Password</label>
             <input
               v-model="form.password_confirmation"
               type="password"
-              class="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              class="w-full p-2 border border-gray-600 bg-gray-700 text-white rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-gray-500"
               placeholder="Confirm your password"
               required
             />
@@ -56,14 +56,14 @@
           <div v-if="error" class="text-red-600 text-sm">{{ error }}</div>
           <button
             type="submit"
-            class="w-full bg-blue-600 text-white px-4 py-2 rounded-full font-semibold hover:bg-blue-700 transition-all transform hover:scale-105 shadow"
+            class="w-full bg-gray-700 text-white px-4 py-2 rounded-full font-semibold hover:bg-gray-800 transition-all transform hover:scale-105 shadow border border-gray-600"
           >
             {{ isLogin ? 'Login' : 'Register' }}
           </button>
           <button
             type="button"
             @click="isLogin = !isLogin"
-            class="w-full text-white  text-sm hover:text-blue-800"
+            class="w-full text-gray-300 text-sm hover:text-gray-100"
           >
             {{ isLogin ? 'Need an account? Register' : 'Already have an account? Login' }}
           </button>

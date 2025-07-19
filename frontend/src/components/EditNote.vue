@@ -1,6 +1,6 @@
 <template>
   <div class="min-h-screen relative overflow-hidden">
-    <div class="absolute inset-0 bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 animate-gradient z-0"></div>
+    <div class="absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-800 to-black animate-gradient z-0"></div>
     <div class="relative z-10 container mx-auto px-4 py-8">
       <div class="text-center mb-12">
         <h1 class="text-4xl md:text-5xl font-bold text-white drop-shadow-lg mb-4">
@@ -10,30 +10,30 @@
           Update your note below.
         </p>
       </div>
-      <div class="bg-white/90 backdrop-blur-sm rounded-lg shadow-2xl p-6 max-w-3xl mx-auto">
+      <div class="bg-gray-800/90 backdrop-blur-sm rounded-lg shadow-2xl p-6 max-w-3xl mx-auto border border-gray-700">
         <form @submit.prevent="submit" class="space-y-6">
           <input
             v-model="title"
             placeholder="Note Title"
             required
-            class="w-full p-4 rounded-md border border-gray-200 focus:border-blue-400 focus:ring focus:ring-blue-100 focus:ring-opacity-50 text-gray-900 bg-white"
+            class="w-full p-4 rounded-md border border-gray-600 focus:border-gray-500 focus:ring focus:ring-gray-500 focus:ring-opacity-50 text-white bg-gray-700 placeholder-gray-400"
           />
           <textarea
             v-model="body"
             placeholder="Note body (optional)"
-            class="w-full p-4 rounded-md border border-gray-200 focus:border-blue-400 focus:ring focus:ring-blue-100 focus:ring-opacity-50 text-gray-900 bg-white h-40"
+            class="w-full p-4 rounded-md border border-gray-600 focus:border-gray-500 focus:ring focus:ring-gray-500 focus:ring-opacity-50 text-white bg-gray-700 h-40 placeholder-gray-400"
           ></textarea>
           <div v-if="error" class="text-red-600 text-sm">{{ error }}</div>
           <div class="flex gap-4">
             <button
               type="submit"
-              class="bg-blue-500 text-white px-6 py-3 rounded-full font-semibold hover:bg-blue-600 transition-all transform hover:scale-105 shadow-md"
+              class="bg-gray-700 text-white px-6 py-3 rounded-full font-semibold hover:bg-gray-800 transition-all transform hover:scale-105 shadow-md border border-gray-600"
             >
               Update Note
             </button>
             <button
               @click.prevent="$router.push('/')"
-              class="bg-gray-400 text-white px-6 py-3 rounded-full font-semibold hover:bg-gray-500 transition-all transform hover:scale-105 shadow-md"
+              class="bg-gray-600 text-white px-6 py-3 rounded-full font-semibold hover:bg-gray-700 transition-all transform hover:scale-105 shadow-md border border-gray-500"
             >
               Cancel
             </button>
