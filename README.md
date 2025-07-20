@@ -30,7 +30,7 @@ Login Page
 
 Note Page
 
-<p align="center"> <img src="Assests/mynote.png" alt="mynote" width="600" height="400"/> </p>
+<p align="center"> <img src="Assests/mynote.png" alt="mynote" width="600" height="550"/> </p>
 
 Edit Note Page
 
@@ -38,7 +38,7 @@ Edit Note Page
 
 Profile Page
 
-<p align="center"> <img src="Assests/profile.png" alt="profile" width="600" height="400"/> </p>
+<p align="center"> <img src="Assests/profile.png" alt="profile" width="600" height="750"/> </p>
 
 
 ## 🛠️ Technology Stack
