@@ -74,7 +74,7 @@
 </template>
 
 <script>
-import { api, sanctum } from '@/axios';
+import { api } from '@/axios';
 import { ElMessage } from 'element-plus';
 
 export default {
@@ -98,12 +98,6 @@ export default {
         // Clear any existing user data first
         localStorage.removeItem('token');
         localStorage.removeItem('user');
-        
-        // Fetch CSRF token using the sanctum instance
-        await sanctum.get('/sanctum/csrf-cookie');
-        
-        // Small delay to ensure cookie is set
-        await new Promise(resolve => setTimeout(resolve, 200));
         
         const endpoint = this.isLogin ? 'auth/login' : 'auth/register';
         const response = await api.post(endpoint, this.form);

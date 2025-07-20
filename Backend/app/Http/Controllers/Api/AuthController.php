@@ -64,13 +64,36 @@ class AuthController extends Controller
     public function logout(Request $request)
     {
         try {
-            if ($request->user()) {
-                $request->user()->currentAccessToken()->delete();
-                return response()->json(['message' => 'Logged out successfully'], 200);
+            // Get the authenticated user
+            $user = $request->user();
+            
+            if (!$user) {
+                \Log::warning('Logout attempt with no authenticated user');
+                return response()->json(['message' => 'User not authenticated'], 401);
             }
-            return response()->json(['message' => 'No active session'], 401);
+            
+            // Get the current access token
+            $token = $user->currentAccessToken();
+            
+            if (!$token) {
+                \Log::warning('Logout attempt with no current access token for user: ' . $user->id);
+                return response()->json(['message' => 'No active token found'], 400);
+            }
+            
+            // Delete the current access token (for pure token auth)
+            $token->delete();
+            
+            \Log::info('User logged out successfully: ' . $user->id);
+            return response()->json(['message' => 'Logged out successfully'], 200);
+            
         } catch (\Exception $e) {
-            return response()->json(['message' => 'Error during logout', 'error' => $e->getMessage()], 500);
+            \Log::error('Logout error: ' . $e->getMessage());
+            \Log::error('Stack trace: ' . $e->getTraceAsString());
+            
+            return response()->json([
+                'message' => 'Error during logout', 
+                'error' => config('app.debug') ? $e->getMessage() : 'Internal server error'
+            ], 500);
         }
     }
 }
