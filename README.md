@@ -12,6 +12,35 @@ A full-stack note-taking application built with Laravel (Backend) and Vue.js (Fr
 - **Responsive Design**: Built with Tailwind CSS and Element Plus
 - **API-based Architecture**: RESTful API backend with Vue.js frontend
 
+## 🖼️ User Interfaces
+
+Home Page
+
+<p align="center"> <img src="Assests/home.png" alt="Home Page" width="600" height="400"/> </p>
+
+
+Register Page
+<p align="center"> <img src="Assests/register.png" alt="register" width="600" height="400"/> </p>
+ 
+
+Login Page 
+
+<p align="center"> <img src="Assests/login.png" alt="login" width="600" height="400"/> </p>
+
+
+Note Page
+
+<p align="center"> <img src="Assests/mynote.png" alt="mynote" width="600" height="400"/> </p>
+
+Edit Note Page
+
+<p align="center"> <img src="Assests/editnote.png" alt="editnote" width="600" height="400"/> </p>
+
+Profile Page
+
+<p align="center"> <img src="Assests/profile.png" alt="profile" width="600" height="400"/> </p>
+
+
 ## 🛠️ Technology Stack
 
 ### Backend
