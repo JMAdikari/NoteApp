@@ -8,7 +8,7 @@
         <h1 class="text-5xl md:text-6xl font-bold text-white drop-shadow-lg mb-6">
           📝 My Notes
         </h1>
-        <p class="text-xl md:text-2xl text-white/90 max-w-3xl mx-auto mb-8">
+        <p class="text-xl md:text-2xl text-white max-w-3xl mx-auto mb-8">
           Your personal note-taking companion
         </p>
       </div>

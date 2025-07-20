@@ -6,7 +6,7 @@
         <h1 class="text-4xl md:text-5xl font-bold text-white drop-shadow-lg mb-4">
           📝 My Notes
         </h1>
-        <p class="text-lg md:text-xl text-white/80 max-w-2xl mx-auto">
+        <p class="text-lg md:text-xl text-white max-w-2xl mx-auto">
           Sign in or create an account to start managing your notes.
         </p>
       </div>

@@ -6,7 +6,7 @@
         <h1 class="text-4xl md:text-5xl font-bold text-white drop-shadow-lg mb-4">
           📝 Edit Note
         </h1>
-        <p class="text-lg md:text-xl text-white/80 max-w-2xl mx-auto">
+        <p class="text-lg md:text-xl text-white max-w-2xl mx-auto">
           Update your note below.
         </p>
       </div>
