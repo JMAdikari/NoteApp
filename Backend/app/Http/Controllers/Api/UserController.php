@@ -16,13 +16,14 @@ class UserController extends Controller
     public function profile(Request $request)
     {
         try {
-            $user = $request->user();
-            
+            $user = $request->user(); // gets user from the API token
+
             if (!$user) {
                 return response()->json(['message' => 'User not found'], 404);
             }
 
             // Get user with note count
+            // User is authenticated, proceed with operation
             $user->loadCount('notes');
             
             return response()->json([
@@ -46,7 +47,7 @@ class UserController extends Controller
     public function updateProfile(Request $request)
     {
         try {
-            $user = $request->user();
+            $user = $request->user(); // Get authenticated user
             
             if (!$user) {
                 return response()->json(['message' => 'User not found'], 404);
