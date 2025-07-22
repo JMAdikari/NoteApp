@@ -10,9 +10,9 @@ use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
-    /**
-     * Get the authenticated user's profile
-     */
+    // Get the authenticated user's profile ,
+    // User profile operations and account management
+     
     public function profile(Request $request)
     {
         try {
@@ -40,9 +40,9 @@ class UserController extends Controller
         }
     }
 
-    /**
-     * Update the authenticated user's profile
-     */
+
+      // Update the authenticated user's profile
+
     public function updateProfile(Request $request)
     {
         try {
@@ -81,9 +81,9 @@ class UserController extends Controller
         }
     }
 
-    /**
-     * Change the authenticated user's password
-     */
+
+     // Change the authenticated user's password
+
     public function changePassword(Request $request)
     {
         try {
@@ -120,9 +120,8 @@ class UserController extends Controller
         }
     }
 
-    /**
-     * Delete the authenticated user's account
-     */
+    // Delete the authenticated user's account
+
     public function deleteAccount(Request $request)
     {
         try {

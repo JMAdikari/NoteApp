@@ -11,5 +11,6 @@ class Note extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
-    }
+    }//Defines mass-assignable fields
+    //Each note belongs to one user
 }

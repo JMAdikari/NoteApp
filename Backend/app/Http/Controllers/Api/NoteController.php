@@ -7,17 +7,13 @@ use Illuminate\Support\Facades\Log;
 
 class NoteController extends Controller
 {
-    /**
-     * Apply authentication middleware to all methods
-     */
+    // Apply authentication middleware to all methods
     public function __construct()
     {
-        $this->middleware('auth:sanctum');
+        $this->middleware('auth:sanctum'); //Middleware ensures all methods require authentication
     }
 
-    /**
-     * Get notes query filtered by authenticated user
-     */
+    // Get notes query filtered by authenticated user
     private function getUserNotesQuery()
     {
         return Note::where('user_id', auth()->id());
@@ -55,7 +51,7 @@ class NoteController extends Controller
         }
     }
 
-    public function store(Request $request)
+    public function store(Request $request) //Create New Note
     {
         try {
             $user = $request->user();
@@ -91,7 +87,7 @@ class NoteController extends Controller
         }
     }
 
-    public function show(Request $request, $id)
+    public function show(Request $request, $id) //Get Single Note
     {
         try {
             $user = $request->user();
